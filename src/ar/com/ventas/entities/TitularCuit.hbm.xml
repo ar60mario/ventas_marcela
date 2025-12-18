@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.com.ventas.entities.TitularCuit" schema="marce" table="titular_cuit">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="razonSocial" type="string" column="RAZON_SOCIAL"/>
+        <property name="calleNumero" type="string" column="CALLE_NUMERO"/>
+        <property name="codigoPostalLocalidad" type="string" column="CODIGO_POSTAL_LOCALIDAD"/>
+        <property name="cuit" type="string" column="CUIT"/>
+        <property name="telefono" type="string" column="TELEFONO"/>
+        <property name="provincia" type="string" column="PROVINCIA"/>
+        <property name="mail" type="string" column="MAIL"/>
+        <property name="sucursal" type="integer" column="SUCURSAL"/>
+        <property name="categoria" type="string" column="CATEGORIA"/>
+        <property name="iibb" type="string" column="IIBB"/>
+        <property name="fechaInicioActividades" type="date" column="FECHA_INICIO_ACTIVIDADES"/>
+        <property name="activo" type="boolean" column="ACTIVO"/>
+        <property name="observaciones" type="string" column="OBSERVACIONES"/>
+    </class>
+</hibernate-mapping>

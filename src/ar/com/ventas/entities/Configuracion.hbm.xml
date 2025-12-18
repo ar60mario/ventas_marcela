@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.com.ventas.entities.Configuracion" schema="marce" table="configuracion">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="sucursal" type="integer" column="SUCURSAL"/>
+        <property name="numeroFc" type="integer" column="NUMERO_FC"/>
+        <property name="numeroNc" type="integer" column="NUMERO_NC"/>
+        <property name="numeroFcA" type="integer" column="NUMERO_FC_A"/>
+        <property name="numeroFcB" type="integer" column="NUMERO_FC_B"/>
+        <property name="numeroNcA" type="integer" column="NUMERO_NC_A"/>
+        <property name="numeroNcB" type="integer" column="NUMERO_NC_B"/>
+        <many-to-one name="titular"
+                    class="ar.com.ventas.entities.TitularCuit"
+                     lazy="false">
+                     <column name="ID_TITULAR_CUIT_" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

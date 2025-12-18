@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.com.ventas.entities.CertificadosAfip" schema="marce" table="certificados_afip">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="certificado" type="string" column="CERTIFICADO"/>
+        <property name="llave" type="string" column="LLAVE"/>
+        <property name="fecha" type="date" column="FECHA"/>
+        <many-to-one name="titularCuit"
+                    class="ar.com.ventas.entities.TitularCuit"
+                     lazy="false">
+                     <column name="ID_TITULAR_CUIT" not-null="false"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

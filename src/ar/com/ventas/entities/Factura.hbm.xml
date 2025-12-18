@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.com.ventas.entities.Factura" schema="marce" table="factura">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="fecha" type="date" column="FECHA"/>
+        <property name="abonoDesde" type="date" column="ABONO_DESDE"/>
+        <property name="abonoHasta" type="date" column="ABONO_HASTA"/>
+        <property name="vencimientoFactura" type="date" column="VENCIMIENTO_FACTURA"/>
+        <property name="productoServicio" type="integer" column="PRODUCTO_SERVICIO"/>
+        <property name="tipoDoc" type="integer" column="TIPO_DOC"/>
+        <property name="sucursal" type="integer" column="SUCURSAL"/>
+        <property name="numero" type="integer" column="NUMERO"/>
+        <property name="importe" type="double" column="IMPORTE"/>
+        <property name="cae" type="long" column="CAE"/>
+        <property name="fechaVencimCae" type="date" column="FECHA_VENCIM_CAE"/>
+        <property name="numeroReferencia" type="integer" column="NUMERO_REFERENCIA"/>
+        <many-to-one name="cliente"
+                    class="ar.com.ventas.entities.Cliente"
+                     lazy="false">
+                     <column name="ID_CLIENTE" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="rubro"
+                    class="ar.com.ventas.entities.Rubro"
+                     lazy="false">
+                     <column name="ID_RUBRO" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

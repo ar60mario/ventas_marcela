@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.com.ventas.entities.TicketTime" schema="marce" table="ticket_time">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="fecha" type="date" column="FECHA"/>
+        <property name="hora" type="integer" column="HORA"/>
+        <property name="minuto" type="integer" column="MINUTO"/>
+        <property name="segundo" type="integer" column="SEGUNDO"/>
+        <property name="token" type="text" column="TOKEN"/>
+        <property name="sign" type="text" column="SIGN"/>
+        <property name="exception" type="string" column="EXCEPTION"/>
+        <many-to-one name="titular"
+                    class="ar.com.ventas.entities.TitularCuit"
+                     lazy="false">
+                     <column name="ID_TITULAR_CUIT" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
