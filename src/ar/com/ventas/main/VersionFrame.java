@@ -6,7 +6,7 @@ public class VersionFrame extends javax.swing.JFrame {
     
     public VersionFrame() {
         initComponents();
-        versionTxt.setText("DICIEMBRE 015-2025");
+        versionTxt.setText("MARZO 007-2026");
         versionTxt.setEditable(false);
         volverBtn.requestFocus();
     }

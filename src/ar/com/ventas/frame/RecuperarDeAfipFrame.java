@@ -2,9 +2,11 @@ package ar.com.ventas.frame;
 
 import ar.com.ventas.entities.Cliente;
 import ar.com.ventas.entities.Factura;
+import ar.com.ventas.entities.Rubro;
 import ar.com.ventas.main.MainFrame;
 import ar.com.ventas.services.ClienteService;
 import ar.com.ventas.services.FacturaService;
+import ar.com.ventas.services.RubroService;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.LibraryLoader;
@@ -12,6 +14,7 @@ import com.jacob.com.Variant;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,13 +23,13 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
+    private List<Rubro> rubros;
 
-        public RecuperarDeAfipFrame() {
+    public RecuperarDeAfipFrame() {
         initComponents();
         limpiar();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -65,6 +68,8 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
         clienteTxt = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         ultimoTxt = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        combo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("RECUPERAR COMPROBANTE DE AFIP");
@@ -162,6 +167,10 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
         ultimoTxt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ultimoTxt.setText("jTextField1");
 
+        jLabel17.setText("Rubro:");
+
+        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,14 +214,15 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(caeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(fechaCaeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel8))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cuitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(cuitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel17))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel13)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -221,7 +231,15 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
                                                 .addComponent(jLabel14)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(totalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(0, 105, Short.MAX_VALUE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                        .addComponent(fechaCaeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(105, 105, 105))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -283,7 +301,9 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(tipoDocTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(cuitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cuitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -313,8 +333,8 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_volverBtnActionPerformed
 
     private void numeroTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numeroTxtKeyPressed
-        if(evt.getKeyCode()==10){
-            if(!numeroTxt.getText().isEmpty()){
+        if (evt.getKeyCode() == 10) {
+            if (!numeroTxt.getText().isEmpty()) {
                 go();
             }
         }
@@ -361,6 +381,7 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField caeTxt;
     private javax.swing.JTextField clienteTxt;
+    private javax.swing.JComboBox<String> combo;
     private javax.swing.JComboBox<String> comboL;
     private javax.swing.JComboBox<String> comboT;
     private javax.swing.JTextField cuitTxt;
@@ -380,6 +401,7 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -408,19 +430,19 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
         String letr;
         if (t == 1) {
             if (l == 1) {
-                letr = "A";
+                letr = "C";
             } else {
                 if (l == 2) {
-                    letr = "B";
+                    letr = "C";
                 } else {
                     letr = "C";
                 }
             }
         } else {
             if (l == 3) {
-                letr = "A";
+                letr = "C";
             } else {
-                letr = "B";
+                letr = "C";
             }
         }
 //        IvaVentas ivaVentas = null;
@@ -439,11 +461,11 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
         ActiveXComponent wsaa = new ActiveXComponent("WSAA");
         String ver = Dispatch.get(wsaa, "InstallDir").toString() + " " + Dispatch.get(wsaa, "Version").toString();
         String wsdl = "https://wsaa.afip.gov.ar/ws/services/LoginCms";
-        String userdir = "c:/certifmario";
+        String userdir = "c:/abonos/crt";
         Dispatch.call(wsaa, "Autenticar",
                 new Variant("wsfe"),
-                new Variant(userdir + "/MARIO2020_484132ab2d5e5665.crt"),
-                new Variant(userdir + "/clave_privada_20142553202_202010295426.key"),
+                new Variant(userdir + "/marcela_2022_1c92087b2b30df1b.crt"),
+                new Variant(userdir + "/clave_privada_27146186624_202208271940.key"),
                 /*
                 new Variant(userdir + "/nuevo_2018_52c1402efa235ce.crt"),
                 new Variant(userdir + "/clave_privada_20124127581_201811014935.key"),
@@ -453,7 +475,7 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
         String token = Dispatch.get(wsaa, "Token").toString();
         String sign = Dispatch.get(wsaa, "Sign").toString();
         ActiveXComponent wsfev1 = new ActiveXComponent("WSFEv1");
-        Dispatch.put(wsfev1, "Cuit", new Variant("20142553202"));
+        Dispatch.put(wsfev1, "Cuit", new Variant("27146186624"));
         Dispatch.put(wsfev1, "Token", new Variant(token));
         Dispatch.put(wsfev1, "Sign", new Variant(sign));
         String cache = "";
@@ -463,7 +485,7 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
                 new Variant(wsdl)
         );
         String tipo_cbte = "11";
-        String pto_vta = "6";
+        String pto_vta = "4";
         if (t == 1) {
             if (l == 1) {
                 tipo_cbte = "11";
@@ -510,8 +532,8 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
         //String s3 = Dispatch.call(wsfev1, "ObtenerCampoFactura", "iva", 0, "importe").toString();
         String s4 = Dispatch.call(wsfev1, "ObtenerCampoFactura", "imp_neto").toString();
         String s5 = Dispatch.call(wsfev1, "ObtenerCampoFactura", "fecha_cbte").toString();
-        String valor_opcional1 = Dispatch.call(wsfev1,"ObtenerCampoFactura","opcionales", 0, "FechDesde").toString();
-        String valor_opcional2 = Dispatch.call(wsfev1,"ObtenerCampoFactura","opcionales", 0, "FechHasta").toString();
+        String valor_opcional1 = Dispatch.call(wsfev1, "ObtenerCampoFactura", "opcionales", 0, "FechDesde").toString();
+        String valor_opcional2 = Dispatch.call(wsfev1, "ObtenerCampoFactura", "opcionales", 0, "FechHasta").toString();
         System.out.println(valor_opcional1);
         System.out.println(valor_opcional2);
         JOptionPane.showMessageDialog(this, "VER");
@@ -574,7 +596,13 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
         }
         int a = JOptionPane.showConfirmDialog(this, "Guarda Comprobante?", "Atención", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
-            if (!verificar(t, nro_cbte)) {
+            int rowR = combo.getSelectedIndex();
+            if (rowR < 1) {
+                JOptionPane.showMessageDialog(this, "ERROR 597 - SELECCIONE RUBRO");
+                return;
+            }
+            Rubro ru = rubros.get(rowR - 1);
+            if (!verificar(nro_cbte, tipo_cbte)) {
                 JOptionPane.showMessageDialog(this, "Comprobante existente");
                 return;
             }
@@ -582,7 +610,7 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
             iv.setCae(Long.valueOf(s1));
             iv.setCliente(cl);
             iv.setTipoDoc(Integer.valueOf(tipo_cbte));
-
+            iv.setRubro(ru);
             try {
                 iv.setFecha(sdf.parse(fefa));
                 iv.setFechaVencimCae(sdf1.parse(fvc));
@@ -593,7 +621,7 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
             iv.setNumero(Integer.valueOf(numeroTxt.getText()));
             iv.setImporte(d2);
 
-            iv.setSucursal(6);
+            iv.setSucursal(4);
             try {
                 new FacturaService().saveFactura(iv);
             } catch (Exception ex) {
@@ -628,14 +656,27 @@ public class RecuperarDeAfipFrame extends javax.swing.JFrame {
         totalTxt.setText("");
         clienteTxt.setText("");
         numeroTxt.requestFocus();
+        rubros = null;
+        try {
+            rubros = new RubroService().getAllRubrosActivos();
+        } catch (Exception ex) {
+            Logger.getLogger(RecuperarDeAfipFrame.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERROR 655");
+            volver();
+        }
+        combo.removeAllItems();
+        combo.addItem("");
+        for(Rubro ru:rubros){
+            combo.addItem(ru.getDetalle());
+        }
     }
 
-    private boolean verificar(int t, String n) {
+    private boolean verificar(String n, String t) {
         Factura i = null;
-
         int nu = Integer.valueOf(n);
+        int ti = Integer.valueOf(t);
         try {
-            i = new FacturaService().getFacturasByNro(t, nu);
+            i = new FacturaService().getFacturasByNro(nu, ti);
         } catch (Exception ex) {
             Logger.getLogger(RecuperarDeAfipFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

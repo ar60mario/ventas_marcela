@@ -165,7 +165,8 @@ go2();
 
     private void go2() {
         Blob bl = new ClaseNueva().getBl();
-        
+        // INTERFAZ PARA ALMACENAR DATOS BINARIOS GRANDES COMO IMAGENES
+        // UTILIZA INPU_STREAM
         
     }
 }

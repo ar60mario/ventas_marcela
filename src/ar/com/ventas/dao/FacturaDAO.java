@@ -64,17 +64,29 @@ public class FacturaDAO extends GenericDAO {
                 .list();
         return facturas;
     }
+    
+    public List<Factura> getFcAndNcPorCliente(Cliente cliente) {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        List<Factura> facturas;
+        facturas = (List<Factura>) session.createCriteria(Factura.class)
+                .add(Restrictions.eq("cliente", cliente))
+                .addOrder(Order.asc("fecha"))
+                .addOrder(Order.asc("numero"))
+                .list();
+        return facturas;
+    }
 
     public Factura getFacturasByNro(Integer numero, Integer tipoDoc) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Factura factura = null;
-        int ntd = 11;
-        if(tipoDoc == 2){
-            ntd = 13;
-        }
+        int ntd = Integer.valueOf(tipoDoc);
+//        if(tipoDoc == 2){
+//            ntd = 13;
+//        }
         factura = (Factura) session.createCriteria(Factura.class)
                 .add(Restrictions.eq("numero", numero))
                 .add(Restrictions.eq("tipoDoc", ntd))
+//                .add(Restrictions.eq("numero", numero))
                 //.addOrder(Order.asc("numero"))
                 .uniqueResult();
         System.out.println(factura);

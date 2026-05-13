@@ -120,4 +120,18 @@ public class FacturaService {
         }
         return facturas;
     }
+    
+    public List<Factura> getFcAndNcPorCliente(Cliente cliente) throws Exception{
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        List<Factura> facturas = null;
+        try {
+            facturas = new FacturaBO().getFcAndNcPorCliente(cliente);
+            tx.commit();
+        } catch (Exception ex) {
+            tx.rollback();
+            throw new Exception(ex);
+        }
+        return facturas;
+    }
 }
